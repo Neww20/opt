@@ -1,0 +1,109 @@
+# =========================================================
+# A* Algorithm for 8 Puzzle Problem
+# =========================================================
+
+from queue import PriorityQueue
+
+# Goal State
+goal = [[1,2,3],
+        [4,5,6],
+        [7,8,0]]
+
+# Function to find position of blank (0)
+def find_blank(state):
+    for i in range(3):
+        for j in range(3):
+            if state[i][j] == 0:
+                return i, j
+
+# Heuristic Function
+# Counts number of misplaced tiles
+def heuristic(state):
+    count = 0
+    for i in range(3):
+        for j in range(3):
+            if state[i][j] != 0 and state[i][j] != goal[i][j]:
+                count += 1
+    return count
+
+# Convert list to tuple for hashing
+def to_tuple(state):
+    return tuple(tuple(row) for row in state)
+
+# Generate next possible states
+def get_neighbors(state):
+    neighbors = []
+
+    x, y = find_blank(state)
+
+    moves = [(-1,0), (1,0), (0,-1), (0,1)]
+
+    for dx, dy in moves:
+        nx, ny = x + dx, y + dy
+
+        if 0 <= nx < 3 and 0 <= ny < 3:
+
+            # Copy current state
+            new_state = [row[:] for row in state]
+
+            # Swap blank with neighbor
+            new_state[x][y], new_state[nx][ny] = new_state[nx][ny], new_state[x][y]
+
+            neighbors.append(new_state)
+
+    return neighbors
+
+# A* Algorithm
+def a_star(start):
+
+    pq = PriorityQueue()
+
+    # (f, g, state, path)
+    pq.put((heuristic(start), 0, start, []))
+
+    visited = set()
+
+    while not pq.empty():
+
+        f, g, current, path = pq.get()
+
+        if current == goal:
+            return path + [current]
+
+        visited.add(to_tuple(current))
+
+        for neighbor in get_neighbors(current):
+
+            if to_tuple(neighbor) not in visited:
+
+                new_g = g + 1
+                new_f = new_g + heuristic(neighbor)
+
+                pq.put((new_f, new_g, neighbor, path + [current]))
+
+    return None
+
+# Initial State
+start = [[1,2,3],
+         [4,0,6],
+         [7,5,8]]
+
+# Solve Puzzle
+solution = a_star(start)
+
+# Print Solution
+if solution:
+    print("Solution Found:\n")
+
+    step = 0
+    for state in solution:
+
+        print("Step", step)
+        for row in state:
+            print(row)
+
+        print()
+        step += 1
+
+else:
+    print("No Solution")

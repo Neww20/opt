@@ -1,0 +1,54 @@
+def solve_n_queens(n):
+    def backtrack(row):
+        if row == n:
+            solutions.append(board[:])
+            return
+        
+        for col in range(n):
+            if cols[col] or diag1[row - col + n] or diag2[row + col]:
+                continue
+            
+            board[row] = col
+            cols[col] = True
+            diag1[row - col + n] = True
+            diag2[row + col] = True
+            
+            backtrack(row + 1)
+            
+            cols[col] = False
+            diag1[row - col + n] = False
+            diag2[row + col] = False
+
+    solutions = []
+    board = [-1] * n
+    
+    cols = [False] * n
+    diag1 = [False] * (2 * n)
+    diag2 = [False] * (2 * n)
+    
+    backtrack(0)
+    return solutions
+
+
+def print_solutions(solutions, n):
+    for idx, sol in enumerate(solutions, 1):
+        print(f"\nSolution {idx}:")
+        
+        for i in range(n):
+            for j in range(n):
+                if sol[i] == j:
+                    print(f"q{i+1}", end=" ")
+                else:
+                    print(".", end=" ")
+            print()
+
+
+#  Take input from user
+n = int(input("Enter number of queens: "))
+
+solutions = solve_n_queens(n)
+
+if len(solutions) == 0:
+    print("No solution exists")
+else:
+    print_solutions(solutions, n)

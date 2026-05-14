@@ -1,0 +1,91 @@
+# ======================================================
+# LP-2 Practical
+# Elementary Pizza Delivery Chatbot
+# With Branch Locations
+# ======================================================
+
+print(" Welcome to Pizza Delivery Chatbot ")
+print("Type 'exit' anytime to end chat.\n")
+
+# Pizza branch locations
+branches = ["Pune", "Mumbai", "Nashik", "Nagpur"]
+
+while True:
+
+    user = input("You: ").lower()
+
+    # Exit
+    if user == "exit":
+        print("Bot: Thank you for visiting Pizza Delivery Chatbot ")
+        break
+
+    # Greeting
+    elif user in ["hi", "hello", "hey"]:
+        print("Bot: Hello! Welcome to Pizza Delivery Service ")
+
+    # Menu
+    elif "menu" in user or "pizza" in user:
+        print("Bot: Our Pizza Menu:")
+        print("     1. Margherita - ₹200")
+        print("     2. Farmhouse - ₹300")
+        print("     3. Veg Extravaganza - ₹400")
+
+    # Branch locations
+    elif "branch" in user or "location" in user:
+        print("Bot: We have branches in:")
+        for city in branches:
+            print("    -", city)
+
+    # Delivery availability
+    elif "delivery" in user:
+        city = input("Bot: Enter your city: ")
+
+        if city.capitalize() in branches:
+            print("Bot:  Yes! Delivery is available in", city)
+        else:
+            print("Bot:  Sorry, delivery is not available in", city)
+
+    # Order section
+    elif "order" in user:
+
+        city = input("Bot: Enter your city: ")
+
+        if city.capitalize() not in branches:
+            print("Bot:  Sorry! We do not deliver in your city.")
+            continue
+
+        pizza = input("Bot: Which pizza would you like to order? ")
+        qty = int(input("Bot: Enter quantity: "))
+
+        if pizza.lower() == "margherita":
+            total = 200 * qty
+        elif pizza.lower() == "farmhouse":
+            total = 300 * qty
+        elif pizza.lower() == "veg extravaganza":
+            total = 400 * qty
+        else:
+            print("Bot: Sorry, pizza not available.")
+            continue
+
+        address = input("Bot: Enter delivery address: ")
+
+        print("\nBot:  Order Confirmed!")
+        print("      City :", city)
+        print("      Pizza :", pizza)
+        print("      Quantity :", qty)
+        print("      Total Bill : ₹", total)
+        print("      Delivery Address :", address)
+        print("      Your pizza will arrive soon ")
+
+    # Payment methods
+    elif "payment" in user:
+        print("Bot: We accept Cash on Delivery and Online Payment ")
+
+    # Thank you
+    elif "thank" in user:
+        print("Bot: You're welcome")
+
+    # Unknown input
+    else:
+        print("Bot: Sorry, I didn't understand that.")
+        print("     You can ask about menu, order, branch, location, payment, or delivery.")

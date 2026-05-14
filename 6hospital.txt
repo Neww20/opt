@@ -1,0 +1,87 @@
+# ======================================================
+# LP-2 Practical
+# Expert System for Hospitals and Medical Facilities
+# ======================================================
+
+print(" Welcome to Hospital Expert System ")
+print("Type 'exit' anytime to quit.\n")
+
+while True:
+
+    user = input("You: ").lower()
+
+    # Exit
+    if user == "exit":
+        print("Bot: Thank you! Stay healthy")
+        break
+
+    # Greeting
+    elif user in ["hi", "hello", "hey"]:
+        print("Bot: Hello! How can I help you today?")
+
+    # Fever
+    elif "fever" in user:
+        print("Bot: You may have viral infection or flu.")
+        print("     Suggested Department: General Medicine")
+        print("     Advice: Drink plenty of water and take rest.")
+
+    # Cold / Cough
+    elif "cough" in user or "cold" in user:
+        print("Bot: You may have common cold or throat infection.")
+        print("     Suggested Department: ENT Specialist")
+
+    # Chest Pain
+    elif "chest pain" in user:
+        print("Bot: Chest pain can be serious.")
+        print("     Suggested Department: Cardiology")
+        print("     Advice: Visit hospital immediately.")
+
+    # Headache
+    elif "headache" in user:
+        print("Bot: Headache may occur due to stress or migraine.")
+        print("     Suggested Department: Neurology")
+
+    # Bone Fracture
+    elif "fracture" in user or "bone" in user:
+        print("Bot: You may need X-ray and treatment.")
+        print("     Suggested Department: Orthopedics")
+
+    # Skin Problem
+    elif "skin" in user or "allergy" in user:
+        print("Bot: Suggested Department: Dermatology")
+
+    # Emergency
+    elif "emergency" in user:
+        print("Bot:  Emergency services are available 24/7.")
+
+    # Hospital facilities
+    elif "facilities" in user:
+        print("Bot: Our hospital facilities include:")
+        print("      ICU")
+        print("      Ambulance Service")
+        print("      Pharmacy")
+        print("     X-Ray and MRI")
+        print("      Blood Bank")
+
+    # Doctors
+    elif "doctor" in user:
+        print("Bot: Specialist doctors available:")
+        print("     - Cardiologist")
+        print("     - Neurologist")
+        print("     - Orthopedic")
+        print("     - Dermatologist")
+        print("     - ENT Specialist")
+
+    # Appointment
+    elif "appointment" in user:
+        name = input("Bot: Enter patient name: ")
+        dept = input("Bot: Enter department: ")
+
+        print("\nBot:  Appointment Booked Successfully!")
+        print("     Patient Name :", name)
+        print("     Department   :", dept)
+
+    # Unknown input
+    else:
+        print("Bot: Sorry, I didn't understand that.")
+        print("     Ask about fever, cough, doctor, facilities, appointment, etc.")

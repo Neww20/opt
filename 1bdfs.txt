@@ -1,0 +1,63 @@
+from collections import defaultdict, deque
+
+class Graph:
+    def __init__(self):
+        # Dictionary to store graph
+        self.graph = defaultdict(list)
+
+    # Function to add edge
+    def add_edge(self, u, v):
+        self.graph[u].append(v)
+        self.graph[v].append(u)   # Undirected graph
+
+    # Recursive DFS function
+    def dfs(self, vertex, visited):
+        visited.add(vertex)
+        print(vertex, end=" ")
+
+        for neighbor in self.graph[vertex]:
+            if neighbor not in visited:
+                self.dfs(neighbor, visited)
+
+    # BFS function
+    def bfs(self, start):
+        visited = set()
+        queue = deque()
+
+        visited.add(start)
+        queue.append(start)
+
+        while queue:
+            vertex = queue.popleft()
+            print(vertex, end=" ")
+
+            for neighbor in self.graph[vertex]:
+                if neighbor not in visited:
+                    visited.add(neighbor)
+                    queue.append(neighbor)
+
+
+# ================= MAIN PROGRAM =================
+
+g = Graph()
+
+# Input number of edges
+edges = int(input("Enter number of edges: "))
+
+print("Enter edges (u v):")
+
+for _ in range(edges):
+    u, v = map(int, input().split())
+    g.add_edge(u, v)
+
+# Starting vertex
+start = int(input("Enter starting vertex: "))
+
+# DFS Traversal
+print("\nDepth First Search (DFS):")
+visited = set()
+g.dfs(start, visited)
+
+# BFS Traversal
+print("\nBreadth First Search (BFS):")
+g.bfs(start)
