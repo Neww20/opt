@@ -1,0 +1,473 @@
+Problem Statement
+
+Develop a Student Management System using Salesforce Cloud to store and manage student information.
+
+Modules of Application
+1. Student Module
+
+Stores:
+
+Student Name
+Roll Number
+Email
+Contact
+2. Course Module
+
+Stores:
+
+Course Name
+Duration
+Fees
+3. Attendance Module
+
+Stores:
+
+Attendance Percentage
+Status
+Steps to Create Custom Application
+Step 1: Create Salesforce Developer Account
+Open Salesforce website
+Click Sign Up
+Create Developer Account
+Verify Email
+Login to Salesforce
+Step 2: Open Setup
+Click Gear Icon
+Select Setup
+
+Setup is the main administration page.
+
+Step 3: Create Custom Object
+Procedure
+Go to Object Manager
+Click Create
+Select Custom Object
+Enter Details
+Field	Value
+Label	Student
+Plural Label	Students
+Object Name	Student
+Record Name	Student Name
+Click Save
+Step 4: Create Fields
+Example Fields
+Field Name	Data Type
+Roll Number	Number
+Email	Email
+Phone	Phone
+Address	Text Area
+Attendance	Percent
+Procedure
+Open Student Object
+Go to Fields & Relationships
+Click New
+Select Data Type
+Enter Field Name
+Save
+Step 5: Create Relationship in Salesforce
+
+Relationships are used to connect one object with another object in Salesforce.
+
+Example:
+
+Student Object connected with Course Object
+One Course can have many Students
+
+This helps in:
+
+Sharing related information
+Managing connected records
+Improving database organization
+Types of Relationships in Salesforce
+1. Lookup Relationship
+
+A Lookup Relationship creates a loose connection between two objects.
+
+Features
+Parent and child records are independent
+Child record can exist without parent
+Deleting parent does not delete child automatically
+Example
+Student object linked to Course object
+Even if Course is deleted, Student record still exists
+How to Create Lookup Relationship
+Steps
+Go to Setup
+Open Object Manager
+Select Student Object
+Click Fields & Relationships
+Click New
+Select Lookup Relationship
+Click Next
+Choose Related Object:
+Course
+Enter Field Label:
+Course Name
+Click Save
+
+How to Create Tab in Salesforce (Step-by-Step)
+
+A Tab is used to open your object easily from the app menu.
+
+Without a tab:
+
+Your object exists
+But it is not visible in the app menu properly
+
+So after creating the Student object, you create a Student Tab.
+
+Step-by-Step Process
+Step 1: Open Salesforce Setup
+
+Top-right corner:
+
+⚙️ Gear Icon → Click Setup
+
+Step 2: Search “Tabs”
+
+Left side search box:
+
+Type:
+
+Tabs
+
+You will see:
+
+Tabs
+
+Click it.
+
+Step 3: Open Custom Object Tabs
+
+Now screen opens.
+
+Scroll down a little.
+
+You will see section:
+
+Custom Object Tabs
+
+Click:
+
+New
+What You Will See
+
+Salesforce asks:
+
+Object
+
+Dropdown menu opens.
+
+Select:
+
+Student
+
+(Your custom object)
+
+Step 4: Choose Tab Style
+
+Now Salesforce asks for:
+
+Tab Style
+
+This is just icon/color.
+
+Choose any style:
+
+Book
+People
+Laptop
+Star
+
+Anything is fine.
+
+Step 5: Click Next
+
+Keep clicking:
+
+Next → Next → Save
+
+Done ✅
+
+Result
+
+Now your Student object becomes visible in:
+
+App Menu
+Navigation Bar
+
+You can now:
+
+Open Student records
+Add new students
+Edit data
+
+Step 7: Create Lightning App in Salesforce
+
+Lightning App is like your complete project/application.
+
+It combines:
+
+Tabs
+Objects
+Features
+
+Example:
+Your Student Management System App.
+
+PART 1 — CREATE LIGHTNING APP
+Step 1: Open Setup
+
+Top-right corner:
+
+⚙️ Gear Icon → Setup
+
+Step 2: Search “App Manager”
+
+Left search box type:
+
+App Manager
+
+Click:
+
+App Manager
+Step 3: Click “New Lightning App”
+
+Top-right side:
+
+Click:
+
+New Lightning App
+Step 4: Enter App Details
+
+Now fill details:
+
+Field	What to Type
+App Name	Student Management System
+Description	Student Management Application
+Logo	Optional
+
+Then click:
+
+Next
+Step 5: Choose Navigation Style
+
+You will see:
+
+Standard Navigation
+Console Navigation
+
+Select:
+
+Standard Navigation
+
+Click:
+
+Next
+Step 6: Utility Items
+
+Do nothing here.
+
+Just click:
+
+Next
+Step 7: Add Tabs
+
+Now Salesforce shows:
+
+Available Items (left side)
+Selected Items (right side)
+
+Add these:
+
+Student
+Course
+Attendance
+
+How?
+
+Click object name
+Click Arrow → move to right side
+
+Then click:
+
+Next
+Step 8: Assign Users
+
+Keep default settings.
+
+Click:
+
+Next
+Step 9: Save Application
+
+Click:
+
+Save & Finish
+
+DONE ✅
+
+PART 2 — ADD RECORDS (DATA ENTRY)
+
+Now you will enter student data manually.
+
+Step 1: Open App Launcher
+
+Top-left:
+
+9 dots icon (App Launcher)
+
+Click it.
+
+Search:
+
+Student Management System
+
+Open it.
+
+Step 2: Open Student Tab
+
+Click:
+
+Student
+Step 3: Click “New”
+
+Top-right:
+
+New Button
+
+Click it.
+
+Step 4: Enter Student Details
+
+Example:
+
+Field	Value
+Student Name	Rahul
+Roll Number	101
+Attendance	85
+
+Click:
+
+Save
+Add Another Record
+
+Again click:
+
+New
+
+Enter:
+
+Field	Value
+Student Name	Sneha
+Roll Number	102
+Attendance	90
+
+Save.
+
+DONE ✅
+
+PART 3 — CREATE REPORT
+
+Reports help analyze data.
+
+Example:
+
+Student attendance report
+Student count report
+Step 1: Open Reports
+
+From App Menu:
+Click:
+
+Reports
+Step 2: Click “New Report”
+
+Click:
+
+New Report
+Step 3: Select Object
+
+Search:
+
+Student
+
+Select:
+
+Student Report
+
+Click:
+
+Start Report
+Step 4: Generate Report
+
+Now you will see student data.
+
+Click:
+
+Run Report
+
+DONE ✅
+
+What Report Shows
+Student Name	Roll No	Attendance
+Rahul	101	85%
+Sneha	102	90%
+Report Example
+6
+PART 4 — CREATE DASHBOARD
+
+Dashboard shows charts and graphs.
+
+Step 1: Open Dashboards
+
+Click:
+
+Dashboards
+Step 2: Click “New Dashboard”
+
+Click:
+
+New Dashboard
+Step 3: Enter Dashboard Name
+
+Type:
+
+Student Dashboard
+
+Click:
+
+Create
+Step 4: Add Chart
+
+Click:
+
++ Component
+
+Select your report:
+
+Student Report
+
+Choose chart:
+
+Bar Chart
+Pie Chart
+Line Chart
+
+Anything is okay.
+
+Click:
+
+Add
+Step 5: Save Dashboard
+
+Click:
+
+Save
+
+DONE ✅
+
+Dashboard Shows
+Student Attendance
+Course Performance
+Total Students

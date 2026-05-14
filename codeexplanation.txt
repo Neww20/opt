@@ -1,0 +1,2204 @@
+Practical 1  
+
+Explanation of DFS & BFS Code (Line by Line) 
+
+from collections import defaultdict, deque 
+
+Explanation 
+
+collections → Python module that provides special container data types.  
+
+defaultdict → Automatically creates empty lists for new keys.  
+
+deque → Double-ended queue used for efficient BFS operations.  
+
+Shape 
+
+Creating Graph Class 
+
+class Graph: 
+
+Explanation 
+
+class → Used to create a blueprint/object.  
+
+Graph → Name of the class.  
+
+This class contains: 
+
+Graph storage  
+
+DFS function  
+
+BFS function  
+
+Shape 
+
+Constructor Function 
+
+    def __init__(self): 
+
+Explanation 
+
+__init__ → Constructor function.  
+
+Automatically runs when object is created.  
+
+Shape 
+
+        self.graph = defaultdict(list) 
+
+Explanation 
+
+self → Refers to current object.  
+
+graph → Variable storing adjacency list.  
+
+defaultdict(list) → Creates dictionary where each key stores a list automatically.  
+
+Example: 
+
+{ 
+1: [2,3], 
+2: [1,4] 
+} 
+
+This is called Adjacency List Representation. 
+
+Shape 
+
+Add Edge Function 
+
+    def add_edge(self, u, v): 
+
+Explanation 
+
+Function to connect two vertices. 
+
+u → First vertex  
+
+v → Second vertex  
+
+Shape 
+
+        self.graph[u].append(v) 
+
+Explanation 
+
+Adds v into adjacency list of u. 
+
+Example: 
+If edge is (1,2) 
+
+1 → [2] 
+
+Shape 
+
+        self.graph[v].append(u) 
+
+Explanation 
+
+Adds u into adjacency list of v. 
+
+This makes graph Undirected. 
+
+Example: 
+
+1 → [2] 
+2 → [1] 
+
+Shape 
+
+DFS Function 
+
+    def dfs(self, vertex, visited): 
+
+Explanation 
+
+Recursive DFS function. 
+
+Parameters: 
+
+vertex → Current node  
+
+visited → Stores visited nodes  
+
+Shape 
+
+        visited.add(vertex) 
+
+Explanation 
+
+Marks node as visited. 
+
+Example: 
+
+visited = {1} 
+
+Shape 
+
+        print(vertex, end=" ") 
+
+Explanation 
+
+Prints current vertex. 
+
+end=" " keeps output on same line. 
+
+Shape 
+
+        for neighbor in self.graph[vertex]: 
+
+Explanation 
+
+Loops through all neighboring vertices. 
+
+Example: 
+
+1 → [2,3] 
+
+Neighbors are: 
+
+2  
+
+3  
+
+Shape 
+
+            if neighbor not in visited: 
+
+Explanation 
+
+Checks whether neighbor already visited. 
+
+Prevents: 
+
+Infinite loops  
+
+Repeated traversal  
+
+Shape 
+
+                self.dfs(neighbor, visited) 
+
+Explanation 
+
+Recursive DFS call. 
+
+DFS goes: 
+
+Deep  
+
+One branch at a time  
+
+Shape 
+
+BFS Function 
+
+    def bfs(self, start): 
+
+Explanation 
+
+BFS traversal function. 
+
+start → Starting vertex  
+
+Shape 
+
+        visited = set() 
+
+Explanation 
+
+Stores visited nodes. 
+
+Shape 
+
+        queue = deque() 
+
+Explanation 
+
+Creates queue for BFS. 
+
+Queue follows: 
+
+FIFO (First In First Out)  
+
+Shape 
+
+        visited.add(start) 
+
+Explanation 
+
+Marks starting node visited. 
+
+Shape 
+
+        queue.append(start) 
+
+Explanation 
+
+Adds starting node into queue. 
+
+Shape 
+
+        while queue: 
+
+Explanation 
+
+Runs loop until queue becomes empty. 
+
+Shape 
+
+            vertex = queue.popleft() 
+
+Explanation 
+
+Removes first element from queue. 
+
+FIFO order. 
+
+Shape 
+
+            print(vertex, end=" ") 
+
+Explanation 
+
+Prints current node. 
+
+Shape 
+
+            for neighbor in self.graph[vertex]: 
+
+Explanation 
+
+Traverses neighbors. 
+
+Shape 
+
+                if neighbor not in visited: 
+
+Explanation 
+
+Checks if neighbor already visited. 
+
+Shape 
+
+                    visited.add(neighbor) 
+
+Explanation 
+
+Marks neighbor visited. 
+
+Shape 
+
+                    queue.append(neighbor) 
+
+Explanation 
+
+Adds neighbor to queue. 
+
+BFS explores: 
+
+Level by level  
+
+Shape 
+
+Main Program 
+
+g = Graph() 
+
+Explanation 
+
+Creates graph object. 
+
+Shape 
+
+edges = int(input("Enter number of edges: ")) 
+
+Explanation 
+
+Takes total number of edges from user. 
+
+Shape 
+
+print("Enter edges (u v):") 
+
+Instruction for user. 
+
+Shape 
+
+for _ in range(edges): 
+
+Explanation 
+
+Loop runs for number of edges. 
+
+_ means variable not needed. 
+
+Shape 
+
+    u, v = map(int, input().split()) 
+
+Explanation 
+
+Takes two vertices as input. 
+
+Example: 
+
+1 2 
+
+split() → separates values  
+
+map(int, ...) → converts into integers  
+
+Shape 
+
+    g.add_edge(u, v) 
+
+Explanation 
+
+Adds edge into graph. 
+
+Shape 
+
+start = int(input("Enter starting vertex: ")) 
+
+Explanation 
+
+Takes starting node. 
+
+Shape 
+
+DFS Traversal 
+
+print("\nDepth First Search (DFS):") 
+
+Print heading. 
+
+Shape 
+
+visited = set() 
+
+Creates visited set. 
+
+Shape 
+
+g.dfs(start, visited) 
+
+Calls DFS function. 
+
+Shape 
+
+BFS Traversal 
+
+print("\nBreadth First Search (BFS):") 
+
+Print heading. 
+
+Shape 
+
+g.bfs(start) 
+
+Calls BFS function. 
+
+Shape 
+
+Logic of DFS 
+
+DFS works like: 
+
+Start node  
+
+Visit one neighbor  
+
+Go deeper recursively  
+
+Backtrack after reaching end  
+
+Example: 
+
+Graph: 
+
+1 -- 2 
+|    | 
+3 -- 4 
+
+DFS from 1: 
+
+1 → 2 → 4 → 3 
+
+Uses: 
+
+Recursion  
+
+Stack concept  
+
+Shape 
+
+Logic of BFS 
+
+BFS works level-by-level. 
+
+Example: 
+
+1 
+| \ 
+2  3 
+   | 
+   4 
+
+BFS from 1: 
+
+1 → 2 → 3 → 4 
+
+Uses: 
+
+Queue  
+
+FIFO  
+
+Shape 
+
+Difference Between DFS and BFS 
+
+DFS 
+
+BFS 
+
+Uses Stack/Recursion 
+
+Uses Queue 
+
+Goes Deep First 
+
+Goes Level Wise 
+
+Less Memory 
+
+More Memory 
+
+Faster in some cases 
+
+Finds shortest path 
+
+Shape 
+
+Time Complexity 
+
+DFS 
+
+O(V + E) 
+
+BFS 
+
+O(V + E) 
+
+Where: 
+
+V = Vertices  
+
+E = Edges  
+
+Shape 
+
+Viva Questions with Answers 
+
+1. What is a graph? 
+
+A graph is a collection of vertices and edges. 
+
+Shape 
+
+2. What are vertices? 
+
+Vertices are nodes in graph. 
+
+Shape 
+
+3. What are edges? 
+
+Edges connect two vertices. 
+
+Shape 
+
+4. What is DFS? 
+
+Depth First Search traversal algorithm. 
+
+Shape 
+
+5. What is BFS? 
+
+Breadth First Search traversal algorithm. 
+
+Shape 
+
+6. Which data structure is used in BFS? 
+
+Queue. 
+
+Shape 
+
+7. Which data structure is used in DFS? 
+
+Stack or Recursion. 
+
+Shape 
+
+8. What is recursion? 
+
+A function calling itself. 
+
+Shape 
+
+9. What is adjacency list? 
+
+Graph representation using lists. 
+
+Shape 
+
+10. Why use defaultdict? 
+
+Automatically creates empty list for new keys. 
+
+Shape 
+
+11. What is time complexity of DFS? 
+
+O(V + E) 
+
+Shape 
+
+12. What is time complexity of BFS? 
+
+O(V + E) 
+
+Shape 
+
+13. Which traversal finds shortest path? 
+
+BFS in unweighted graph. 
+
+Shape 
+
+14. What is FIFO? 
+
+First In First Out. 
+
+Shape 
+
+15. What is LIFO? 
+
+Last In First Out. 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Practical 2  
+
+Import Priority Queue 
+
+from queue import PriorityQueue 
+
+Imports PriorityQueue.  
+
+A* uses priority queue to select the state with minimum cost f(n) first.  
+
+Shape 
+
+Goal State 
+
+goal = [[1,2,3], 
+        [4,5,6], 
+        [7,8,0]] 
+
+Final answer state of puzzle.  
+
+0 represents blank space.  
+
+Goal looks like: 
+
+1 2 3 
+4 5 6 
+7 8 0 
+
+Shape 
+
+Find Blank Position 
+
+def find_blank(state): 
+
+Function to find where 0 is present.  
+
+Shape 
+
+for i in range(3): 
+    for j in range(3): 
+
+Loops through all rows and columns.  
+
+Shape 
+
+if state[i][j] == 0: 
+
+Checks whether current element is blank.  
+
+Shape 
+
+return i, j 
+
+Returns row and column of blank tile.  
+
+Example: 
+If 0 is at middle: 
+
+1 2 3 
+4 0 6 
+7 5 8 
+
+Returns: 
+
+(1,1) 
+
+Shape 
+
+Heuristic Function 
+
+def heuristic(state): 
+
+Calculates heuristic value h(n).  
+
+Shape 
+
+count = 0 
+
+Variable to count misplaced tiles.  
+
+Shape 
+
+for i in range(3): 
+    for j in range(3): 
+
+Traverses whole puzzle.  
+
+Shape 
+
+if state[i][j] != 0 and state[i][j] != goal[i][j]: 
+
+Checks:  
+
+Tile should not be blank  
+
+Tile is not in correct position  
+
+Shape 
+
+count += 1 
+
+Increase misplaced tile count.  
+
+Shape 
+
+return count 
+
+Returns heuristic value.  
+
+Example: 
+
+1 2 3 
+4 0 6 
+7 5 8 
+
+Misplaced tiles: 
+
+5  
+
+8  
+
+So: 
+
+h(n) = 2 
+
+Shape 
+
+Convert List to Tuple 
+
+def to_tuple(state): 
+
+Converts list into tuple.  
+
+Why? 
+
+Because sets only store immutable data.  
+
+Shape 
+
+return tuple(tuple(row) for row in state) 
+
+Example: 
+
+[[1,2],[3,4]] 
+
+becomes 
+
+((1,2),(3,4)) 
+
+Used for visited checking. 
+
+Shape 
+
+Generate Neighbor States 
+
+def get_neighbors(state): 
+
+Generates all possible next moves.  
+
+Shape 
+
+neighbors = [] 
+
+Empty list to store next states.  
+
+Shape 
+
+x, y = find_blank(state) 
+
+Finds blank tile position.  
+
+Shape 
+
+Possible Moves 
+
+moves = [(-1,0), (1,0), (0,-1), (0,1)] 
+
+Represents: 
+
+Move 
+
+Meaning 
+
+(-1,0) 
+
+Up 
+
+(1,0) 
+
+Down 
+
+(0,-1) 
+
+Left 
+
+(0,1) 
+
+Right 
+
+Shape 
+
+for dx, dy in moves: 
+
+Checks every possible move.  
+
+Shape 
+
+nx, ny = x + dx, y + dy 
+
+Calculates new position after move.  
+
+Shape 
+
+if 0 <= nx < 3 and 0 <= ny < 3: 
+
+Checks move is inside puzzle boundary.  
+
+Shape 
+
+Copy State 
+
+new_state = [row[:] for row in state] 
+
+Creates copy of puzzle.  
+
+Without this: 
+
+Original puzzle changes.  
+
+Shape 
+
+Swap Blank Tile 
+
+new_state[x][y], new_state[nx][ny] = new_state[nx][ny], new_state[x][y] 
+
+Swaps blank tile with adjacent tile.  
+
+Shape 
+
+neighbors.append(new_state) 
+
+Stores generated state.  
+
+Shape 
+
+return neighbors 
+
+Returns all possible next states.  
+
+Shape 
+
+A* Algorithm 
+
+def a_star(start): 
+
+Main A* search function.  
+
+Shape 
+
+Create Priority Queue 
+
+pq = PriorityQueue() 
+
+Stores states based on minimum cost.  
+
+Shape 
+
+Insert Initial State 
+
+pq.put((heuristic(start), 0, start, [])) 
+
+Stores: 
+
+Value 
+
+Meaning 
+
+heuristic(start) 
+
+f(n) 
+
+0 
+
+g(n) 
+
+start 
+
+current puzzle 
+
+[] 
+
+path 
+
+Shape 
+
+Visited Set 
+
+visited = set() 
+
+Stores already explored states.  
+
+Shape 
+
+Loop Until Queue Empty 
+
+while not pq.empty(): 
+
+Runs until solution found.  
+
+Shape 
+
+Get Minimum Cost State 
+
+f, g, current, path = pq.get() 
+
+Removes state with smallest f(n).  
+
+Formula: 
+
+f(n)=g(n)+h(n)
+f
+(
+n
+)
+=
+g
+(
+n
+)
++
+h
+(
+n
+)
+ 
+ 
+
+Shape 
+
+Goal Check 
+
+if current == goal: 
+
+Checks whether goal reached.  
+
+Shape 
+
+return path + [current] 
+
+Returns complete solution path.  
+
+Shape 
+
+Mark as Visited 
+
+visited.add(to_tuple(current)) 
+
+Adds current state to visited set.  
+
+Shape 
+
+Generate Next States 
+
+for neighbor in get_neighbors(current): 
+
+Gets all neighboring states.  
+
+Shape 
+
+Check Not Visited 
+
+if to_tuple(neighbor) not in visited: 
+
+Avoids repeated states.  
+
+Shape 
+
+Update Cost 
+
+new_g = g + 1 
+
+Path cost increases by 1 move.  
+
+Shape 
+
+new_f = new_g + heuristic(neighbor) 
+
+Calculates total A* cost.  
+
+Formula: 
+
+f(n)=g(n)+h(n)
+f
+(
+n
+)
+=
+g
+(
+n
+)
++
+h
+(
+n
+)
+ 
+ 
+
+Shape 
+
+Add to Queue 
+
+pq.put((new_f, new_g, neighbor, path + [current])) 
+
+Inserts new state into priority queue.  
+
+Shape 
+
+No Solution 
+
+return None 
+
+If puzzle cannot be solved.  
+
+Shape 
+
+Initial Puzzle 
+
+start = [[1,2,3], 
+         [4,0,6], 
+         [7,5,8]] 
+
+Starting state.  
+
+Shape 
+
+Solve Puzzle 
+
+solution = a_star(start) 
+
+Calls A* algorithm.  
+
+Shape 
+
+Print Solution 
+
+if solution: 
+
+Checks solution exists.  
+
+Shape 
+
+print("Solution Found:\n") 
+
+Prints success message.  
+
+Shape 
+
+Step Counter 
+
+step = 0 
+
+Counts moves.  
+
+Shape 
+
+Print Each State 
+
+for state in solution: 
+
+Loops through all states.  
+
+Shape 
+
+print("Step", step) 
+
+Prints step number.  
+
+Shape 
+
+for row in state: 
+    print(row) 
+
+Prints puzzle rows.  
+
+Shape 
+
+step += 1 
+
+Increases step count.  
+
+Shape 
+
+Else Condition 
+
+else: 
+    print("No Solution") 
+
+Prints if puzzle unsolvable.  
+
+Shape 
+
+Very Important Viva Questions 
+
+Why use A*? 
+
+Finds shortest path faster than BFS.  
+
+Shape 
+
+What is heuristic? 
+
+Estimated cost to reach goal.  
+
+Shape 
+
+Which heuristic used here? 
+
+Misplaced Tiles Heuristic.  
+
+Shape 
+
+Formula of A*? 
+
+f(n)=g(n)+h(n)
+f
+(
+n
+)
+=
+g
+(
+n
+)
++
+h
+(
+n
+)
+ 
+ 
+
+Where: 
+
+g(n) = actual cost  
+
+h(n) = heuristic cost  
+
+Shape 
+
+Why Priority Queue? 
+
+To always select minimum cost state first.  
+
+Shape 
+
+Why visited set? 
+
+To avoid repeated states and infinite loop.  
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Practical 3 
+
+This is a Python program to implement Kruskal’s Algorithm for finding the Minimum Spanning Tree (MST) of a graph. 
+
+A Minimum Spanning Tree connects all vertices with: 
+
+minimum total edge cost  
+
+no cycles  
+
+Shape 
+
+Step-by-Step Explanation 
+
+1. Number of Vertices 
+
+V = 4 
+
+The graph has 4 vertices: 
+
+0  
+
+1  
+
+2  
+
+3  
+
+Shape 
+
+2. Edge List 
+
+edges = [ 
+    (0, 1, 1), 
+    (0, 2, 3), 
+    (1, 2, 2), 
+    (1, 3, 4), 
+    (2, 3, 5) 
+] 
+
+Each tuple represents: 
+
+(u, v, weight) 
+
+Meaning: 
+
+edge between u and v  
+
+with given weight  
+
+Example: 
+
+(0, 1, 1) 
+
+means: 
+
+edge between vertex 0 and 1  
+
+weight = 1  
+
+Shape 
+
+Graph Representation 
+
+Shape 
+
+3. Sort Edges by Weight 
+
+edges.sort(key=lambda x: x[2]) 
+
+This sorts edges using the weight (x[2]). 
+
+Sorted edges become: 
+
+[ 
+(0,1,1), 
+(1,2,2), 
+(0,2,3), 
+(1,3,4), 
+(2,3,5) 
+] 
+
+Kruskal always picks the smallest edge first. 
+
+Shape 
+
+4. Parent Array 
+
+parent = [i for i in range(V)] 
+
+Creates: 
+
+parent = [0,1,2,3] 
+
+Initially every node is its own parent. 
+
+Used for Union-Find to detect cycles. 
+
+5. Find Function 
+
+def find(i): 
+    while parent[i] != i: 
+        i = parent[i] 
+    return i 
+
+Purpose: 
+
+finds the root parent of a vertex  
+
+Example: 
+
+If: 
+
+parent = [1,2,2,3] 
+
+Then: 
+
+find(0) 
+
+goes: 
+
+0 → 1  
+
+1 → 2  
+
+returns: 
+
+2 
+
+ 
+
+6. Union Function 
+
+def union(x, y): 
+    parent[x] = y 
+
+Purpose: 
+
+joins two sets  
+
+Example: 
+
+union(0,1) 
+
+makes: 
+
+parent[0] = 1 
+
+meaning: 
+
+vertex 0 is connected to set of 1  
+
+ 
+
+7. Empty MST List 
+
+mst = [] 
+total_cost = 0 
+
+mst stores MST edges  
+
+total_cost stores total minimum cost  
+
+ 
+
+8. Main Loop 
+
+for u, v, w in edges: 
+
+Checks every edge one by one. 
+
+ 
+
+9. Find Parents 
+
+x = find(u) 
+y = find(v) 
+
+Finds root parents of vertices. 
+
+ 
+
+10. Cycle Check 
+
+if x != y: 
+
+If parents are different: 
+
+adding edge will NOT create cycle  
+
+so include edge in MST  
+
+If same: 
+
+cycle will form  
+
+skip edge  
+
+ 
+
+11. Add Edge to MST 
+
+mst.append((u, v, w)) 
+
+Stores edge in MST. 
+
+ 
+
+12. Add Weight 
+
+total_cost += w 
+
+Adds edge weight to total cost. 
+
+ 
+
+13. Union Operation 
+
+union(x, y) 
+
+Connects both sets. 
+
+ 
+
+Step-by-Step Execution 
+
+Sorted edges: 
+
+(0,1,1) 
+(1,2,2) 
+(0,2,3) 
+(1,3,4) 
+(2,3,5) 
+
+ 
+
+Edge 1: (0,1,1) 
+
+Different parents: 
+
+add to MST  
+
+MST: 
+
+[(0,1,1)] 
+
+Cost: 
+
+1 
+
+ 
+
+Edge 2: (1,2,2) 
+
+Different parents: 
+
+add to MST  
+
+MST: 
+
+[(0,1,1), (1,2,2)] 
+
+Cost: 
+
+3 
+
+ 
+
+Edge 3: (0,2,3) 
+
+Both already connected. 
+
+Adding it creates cycle. 
+
+SKIP. 
+
+ 
+
+Edge 4: (1,3,4) 
+
+Different parents: 
+
+add to MST  
+
+MST: 
+
+[(0,1,1), (1,2,2), (1,3,4)] 
+
+Cost: 
+
+7 
+
+Now MST has: 
+
+V-1 edges  
+
+3 edges for 4 vertices  
+
+Done. 
+
+ 
+
+Final Output 
+
+Edges in MST: 
+0 -- 1 = 1 
+1 -- 2 = 2 
+1 -- 3 = 4 
+ 
+Total Cost: 7 
+
+ 
+
+Time Complexity 
+
+Sorting: 
+
+O(E log E) 
+
+Union-Find: 
+
+O(E) 
+
+Overall: 
+
+O(E log E) 
+
+where: 
+
+E = number of edges  
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Practical 4 
+
+ 
+
+N-Queens Problem — Full Explanation 
+
+This program solves the N-Queens Problem using the Backtracking Algorithm. 
+
+ 
+
+What is N-Queens Problem? 
+
+Place N queens on an N × N chessboard such that: 
+
+No two queens attack each other.  
+
+A queen can attack: 
+
+Horizontally  
+
+Vertically  
+
+Diagonally  
+
+ 
+
+Example (4 Queens) 
+
+One valid solution: 
+
+. Q . . 
+. . . Q 
+Q . . . 
+. . Q . 
+
+ 
+
+Function Definition 
+
+def solve_n_queens(n): 
+
+Explanation 
+
+Function to solve N-Queens problem. 
+
+Parameter: 
+
+n → Number of queens / board size  
+
+ 
+
+Backtracking Function 
+
+    def backtrack(row): 
+
+Recursive function. 
+
+row → Current row where queen will be placed.  
+
+ 
+
+Base Condition 
+
+        if row == n: 
+
+Explanation 
+
+If all rows completed: 
+
+One valid solution found.  
+
+ 
+
+            solutions.append(board[:]) 
+
+Explanation 
+
+Stores current solution. 
+
+board[:] creates copy of board. 
+
+ 
+
+            return 
+
+Stops recursion for current path. 
+
+ 
+
+Loop Through Columns 
+
+        for col in range(n): 
+
+Explanation 
+
+Try placing queen in every column. 
+
+ 
+
+Safety Check 
+
+            if cols[col] or diag1[row - col + n] or diag2[row + col]: 
+
+Explanation 
+
+Checks whether position is safe. 
+
+ 
+
+Conditions 
+
+1. cols[col] 
+
+Checks vertical attack. 
+
+ 
+
+2. diag1[row - col + n] 
+
+Checks left diagonal. 
+
+Formula: 
+
+row−col+n
+r
+o
+w
+−
+c
+o
+l
++
+n
+ 
+ 
+
+ 
+
+3. diag2[row + col] 
+
+Checks right diagonal. 
+
+Formula: 
+
+row+col
+r
+o
+w
++
+c
+o
+l
+ 
+ 
+
+ 
+
+Continue Statement 
+
+                continue 
+
+If unsafe: 
+Skip current column. 
+
+ 
+
+Place Queen 
+
+            board[row] = col 
+
+Explanation 
+
+Stores queen position. 
+
+Example: 
+
+board[2] = 1 
+
+Means: 
+Queen at: 
+
+row 2, column 1 
+
+ 
+
+Mark Column 
+
+            cols[col] = True 
+
+Marks column occupied. 
+
+ 
+
+Mark Left Diagonal 
+
+            diag1[row - col + n] = True 
+
+Marks left diagonal occupied. 
+
+ 
+
+Mark Right Diagonal 
+
+            diag2[row + col] = True 
+
+Marks right diagonal occupied. 
+
+ 
+
+Recursive Call 
+
+            backtrack(row + 1) 
+
+Move to next row. 
+
+ 
+
+Backtracking Step 
+
+            cols[col] = False 
+
+Unmark column. 
+
+ 
+
+            diag1[row - col + n] = False 
+
+Unmark left diagonal. 
+
+ 
+
+            diag2[row + col] = False 
+
+Unmark right diagonal. 
+
+ 
+
+Why Backtracking? 
+
+If current path fails: 
+
+Remove queen  
+
+Try another position  
+
+This is called Backtracking. 
+
+ 
+
+Solutions List 
+
+    solutions = [] 
+
+Stores all valid solutions. 
+
+ 
+
+Board Array 
+
+    board = [-1] * n 
+
+Explanation 
+
+Initial board. 
+
+Example for n=4: 
+
+[-1, -1, -1, -1] 
+
+ 
+
+Column Array 
+
+    cols = [False] * n 
+
+Tracks occupied columns. 
+
+ 
+
+Diagonal Arrays 
+
+    diag1 = [False] * (2 * n) 
+    diag2 = [False] * (2 * n) 
+
+Tracks occupied diagonals. 
+
+ 
+
+Start Backtracking 
+
+    backtrack(0) 
+
+Starts from row 0. 
+
+ 
+
+Return Solutions 
+
+    return solutions 
+
+Returns all valid arrangements. 
+
+ 
+
+Print Solutions Function 
+
+def print_solutions(solutions, n): 
+
+Prints solutions nicely. 
+
+ 
+
+Enumerate Function 
+
+for idx, sol in enumerate(solutions, 1): 
+
+Explanation 
+
+enumerate() gives: 
+
+index  
+
+value  
+
+Starts numbering from 1. 
+
+ 
+
+Print Solution Number 
+
+print(f"\nSolution {idx}:") 
+
+Displays solution count. 
+
+ 
+
+Board Traversal 
+
+for i in range(n): 
+
+Loop through rows. 
+
+ 
+
+for j in range(n): 
+
+Loop through columns. 
+
+ 
+
+Queen Check 
+
+if sol[i] == j: 
+
+If queen exists: 
+Print queen. 
+
+ 
+
+print(f"q{i+1}", end=" ") 
+
+Print queen. 
+
+ 
+
+Empty Position 
+
+print(".", end=" ") 
+
+Print empty space. 
+
+ 
+
+User Input 
+
+n = int(input("Enter number of queens: ")) 
+
+Takes board size from user. 
+
+ 
+
+Solve Function Call 
+
+solutions = solve_n_queens(n) 
+
+Generates all solutions. 
+
+ 
+
+No Solution Check 
+
+if len(solutions) == 0: 
+
+If no solution exists. 
+
+ 
+
+print("No solution exists") 
+
+Displays message. 
+
+ 
+
+Print Solutions 
+
+print_solutions(solutions, n) 
+
+Displays all solutions. 
+
+ 
+
+Logic of N-Queens 
+
+Step-by-Step 
+
+Place queen in row  
+
+Check safety  
+
+Move to next row  
+
+If conflict:  
+
+Remove queen  
+
+Try another column  
+
+This process is called: 
+
+Backtracking 
+
+ 
+
+Example (4 Queens) 
+
+Try placing: 
+
+Q . . . 
+
+Next row: 
+
+Q . . . 
+. . Q . 
+
+Continue until: 
+
+valid solution found 
+OR  
+
+backtrack  
+
+ 
+
+Why Use Diagonal Arrays? 
+
+Efficient checking. 
+
+Without arrays: 
+
+Need full board traversal  
+
+With arrays: 
+
+O(1) checking  
+
+ 
+
+Time Complexity 
+
+Worst case: 
+
+O(N!)
+O
+(
+N
+!
+)
+ 
+ 
+
+Because: 
+Many permutations possible. 
+
+ 
+
+Space Complexity 
+
+O(N)
+O
+(
+N
+)
+ 
+ 
+
+ 
+
+Advantages 
+
+Efficient solution  
+
+Avoids unnecessary checking  
+
+Uses recursion smartly  
+
+ 
+
+Disadvantages 
+
+Time increases rapidly for large N  
+
+Recursive calls consume memory  
+
+ 
+
+Viva Explanation 
+
+What is N-Queens Problem? 
+
+Place N queens safely on chessboard. 
+
+ 
+
+What is Backtracking? 
+
+Trying possibilities and undoing wrong choices. 
+
+ 
+
+Why one queen per row? 
+
+To avoid horizontal attack. 
+
+ 
+
+Why use diagonal arrays? 
+
+Fast diagonal checking. 
+
+ 
+
+Viva Questions with Answers 
+
+1. What is N-Queens problem? 
+
+Placing N queens safely on chessboard. 
+
+ 
+
+2. Which algorithm is used? 
+
+Backtracking algorithm. 
+
+ 
+
+3. What is backtracking? 
+
+Undoing wrong choices and trying alternatives. 
+
+ 
+
+4. Why one queen per row? 
+
+To prevent row conflict. 
+
+ 
+
+5. Why use recursion? 
+
+To explore all possibilities. 
+
+ 
+
+6. What does cols array store? 
+
+Occupied columns. 
+
+ 
+
+7. What does diag1 store? 
+
+Left diagonals. 
+
+ 
+
+8. What does diag2 store? 
+
+Right diagonals. 
+
+ 
+
+9. Time complexity? 
+
+O(N!)
+O
+(
+N
+!
+)
+ 
+ 
+
+ 
+
+10. Space complexity? 
+
+O(N)
+O
+(
+N
+)
+ 
+ 
+
+ 
+
+11. Why use backtracking? 
+
+To efficiently explore solutions. 
+
+ 
+
+12. Can N-Queens have multiple solutions? 
+
+Yes. 
+
+ 
+
+13. What happens for N=2 or N=3? 
+
+No valid solution exists. 
+
+ 
+
+14. What is base condition? 
+
+When all rows are filled. 
+
+ 
+
+15. What is recursive call here? 
+
+backtrack(row + 1) 
+
+Moves to next row. 
+
+ 
