@@ -1,0 +1,238 @@
+## Steps to Create an Application in Salesforce.com using Apex Programming Language
+
+From your LP2 Manual — **Assignment No: 10** 
+
+### Aim
+
+Creating an Application in Salesforce.com using Apex Programming Language. 
+
+### Objectives
+
+1. Learn Salesforce Cloud
+2. Study Apex Programming Language 
+
+---
+
+# Step-by-Step Procedure
+
+## Step 1: Create Salesforce Developer Account
+
+1. Open Salesforce Developer website:
+   [Salesforce Developer Signup](https://developer.salesforce.com/signup?utm_source=chatgpt.com)
+2. Fill in:
+
+   * Name
+   * Email
+   * Username
+   * Company details
+3. Verify email and login.
+
+---
+
+## Step 2: Open Salesforce Setup
+
+1. Login to Salesforce.
+2. Click the **Gear Icon (⚙️)** at top-right.
+3. Select **Setup**.
+
+---
+
+## Step 3: Open Developer Console
+
+1. Click the profile icon.
+2. Select **Developer Console**.
+3. A new window will open for Apex coding.
+
+---
+
+## Step 4: Create a New Apex Class
+
+1. In Developer Console:
+
+   * Click **File → New → Apex Class**
+2. Enter class name:
+
+   ```apex
+   HelloWorld
+   ```
+3. Click **OK**.
+
+---
+
+## Step 5: Write Apex Program
+
+Example program:
+
+```apex
+public class HelloWorld {
+
+    public static void displayMessage() {
+        System.debug('Hello World from Apex!');
+    }
+
+}
+```
+
+This demonstrates:
+
+* Class creation
+* Method creation
+* Debug output
+
+The manual explains Apex is:
+
+* Strongly typed
+* Object-oriented
+* Java-like syntax 
+
+---
+
+## Step 6: Run the Apex Code
+
+1. Click:
+
+   * **Debug → Open Execute Anonymous Window**
+2. Write:
+
+```apex
+HelloWorld.displayMessage();
+```
+
+3. Click **Execute**.
+
+---
+
+## Step 7: Check Output
+
+1. Open:
+
+   * **Logs**
+2. Find:
+
+   ```text
+   Hello World from Apex!
+   ```
+
+---
+
+# Step 8: Create a Custom Object
+
+1. Go to **Setup**
+2. Search:
+
+   ```text
+   Object Manager
+   ```
+3. Click **Create → Custom Object**
+
+Example:
+
+* Label: Student
+* Plural Label: Students
+* Object Name: Student
+
+Save the object.
+
+---
+
+# Step 9: Add Fields
+
+Inside the custom object:
+
+1. Open **Fields & Relationships**
+2. Click **New**
+3. Create fields such as:
+
+   * Name
+   * Roll Number
+   * Department
+
+---
+
+# Step 10: Insert Records Using Apex
+
+Example:
+
+```apex
+Student__c s = new Student__c();
+
+s.Name = 'Rahul';
+s.Roll_Number__c = 101;
+
+insert s;
+```
+
+The manual mentions Apex supports:
+
+* INSERT
+* UPDATE
+* DELETE
+* SOQL queries 
+
+---
+
+# Step 11: Fetch Records using SOQL
+
+Example:
+
+```apex
+List<Student__c> students =
+[SELECT Name, Roll_Number__c FROM Student__c];
+
+System.debug(students);
+```
+
+---
+
+# Step 12: Update Records
+
+```apex
+Student__c s =
+[SELECT Id, Name FROM Student__c LIMIT 1];
+
+s.Name = 'Amit';
+
+update s;
+```
+
+---
+
+# Step 13: Delete Records
+
+```apex
+Student__c s =
+[SELECT Id FROM Student__c LIMIT 1];
+
+delete s;
+```
+
+---
+
+# Important Features of Apex
+
+According to the manual, Apex provides: 
+
+* Java-like syntax
+* Strong typing
+* Built-in database support
+* SOQL/SOSL query handling
+* DML operations
+* Easy testing support
+
+---
+
+# Applications of Apex
+
+The PDF mentions Apex can be used for: 
+
+* Web services
+* Email services
+* Complex validation
+* Business process automation
+* Triggers and transactional logic
+
+---
+
+# Conclusion
+
+Hence, we created a Salesforce application using Apex Programming Language and performed database operations like Insert, Update, Delete, and SOQL queries.
